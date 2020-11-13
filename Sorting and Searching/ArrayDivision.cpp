@@ -23,18 +23,35 @@ const ll M = (ll)1e9 + 7;
 
 void solve()
 {
+    ll sum = 0, maxx = 0;
     cin >> n >> k;
-    ll x, ans = 0;
-    ll sum = 0;
-    map<ll, ll>mp;
-    mp[0] = 1;
-    fo(i, 0, n) {
-        cin >> x;
-        sum += x;
-        ans += mp[sum - k];
-        mp[sum]++;
+    vector<ll>arr(n);
+    for (auto& v : arr) {
+        cin >> v;
+        maxx = max(maxx, v);
+        sum += v;
     }
-    cout << ans;
+    ll l = maxx;
+    ll r = sum;
+    while (l < r) {
+        ll mid = (l + r) / 2;
+        ll cnt = 0, curr = 0;
+        for (auto& v : arr) {
+            curr += v;
+            if (curr > mid) {
+                curr = v;
+                cnt++;
+            }
+        }
+        cnt++;
+        if (cnt <= k) {
+            r = mid;
+        }
+        else {
+            l = mid + 1;
+        }
+    }
+    cout << l;
 }
 
 int main()

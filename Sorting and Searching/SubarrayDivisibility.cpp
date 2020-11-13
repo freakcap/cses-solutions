@@ -23,7 +23,7 @@ const ll M = (ll)1e9 + 7;
 
 void solve()
 {
-    cin >> n >> k;
+    cin >> n;
     ll x, ans = 0;
     ll sum = 0;
     map<ll, ll>mp;
@@ -31,8 +31,8 @@ void solve()
     fo(i, 0, n) {
         cin >> x;
         sum += x;
-        ans += mp[sum - k];
-        mp[sum]++;
+        ans += mp[(sum % n + n) % n];
+        mp[(sum % n + n) % n]++;
     }
     cout << ans;
 }
